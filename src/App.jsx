@@ -7,6 +7,7 @@ import PracticeProblems from './components/PracticeProblems';
 import { tagsData } from './data/tagsData';
 import { mockData } from './data/mockData';
 import { Layers, Terminal, Sparkles, LogOut, CheckCircle2, BookOpen, Menu, X, Keyboard, HelpCircle, Sun, Moon } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 const DEFAULT_TOTAL_COUNTS = {
   "dp": 2450,
@@ -653,6 +654,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
