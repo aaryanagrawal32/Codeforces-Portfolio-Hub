@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-brand-bg: var(--bg-primary);
+  --color-brand-card: var(--bg-card);
+  --color-brand-border: var(--border-color);
+  --color-brand-border-glow: rgba(168, 85, 247, 0.35);
+  --color-brand-primary: #a855f7;
+  --color-brand-secondary: #22d3ee;
+  
+  --color-cf-gray: #808080;
+  --color-cf-green: #008000;
+  --color-cf-cyan: #03a89e;
+  --color-cf-blue: #0000ff;
+  --color-cf-violet: #a0a;
+  --color-cf-orange: #ff8c00;
+  --color-cf-red: #ff0000;
+
+  /* Dynamically map slates to variables so the entire layout updates automatically */
+  --color-slate-100: var(--text-100);
+  --color-slate-200: var(--text-200);
+  --color-slate-300: var(--text-300);
+  --color-slate-400: var(--text-400);
+  --color-slate-500: var(--text-500);
+  --color-slate-800: var(--bg-800);
+  --color-slate-900: var(--bg-900);
+  --color-slate-950: var(--bg-950);
+}
+
+:root {
+  --text-100: #f1f5f9;
+  --text-200: #e2e8f0;
+  --text-300: #cbd5e1;
+  --text-400: #94a3b8;
+  --text-500: #64748b;
+  
+  --bg-800: #1e293b;
+  --bg-900: #0f172a;
+  --bg-950: #020617;
+  
+  --bg-primary: #0b0713;
+  --bg-card: rgba(18, 11, 30, 0.45);
+  --border-color: rgba(168, 85, 247, 0.15);
+  --radial-bg: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.12) 0%, transparent 60%),
+               radial-gradient(circle at 100% 100%, rgba(34, 211, 238, 0.05) 0%, transparent 50%),
+               #0b0713;
+  
+  --text-heading: #ffffff;
+  
+  --chart-grid: rgba(255, 255, 255, 0.05);
+  --heatmap-empty-fill: #1c1c24;
+  --heatmap-empty-stroke: #2f2f3b;
+}
+
+html.light {
+  --text-100: #0f172a; /* Slate 900 */
+  --text-200: #1e293b; /* Slate 800 */
+  --text-300: #334155; /* Slate 700 */
+  --text-400: #475569; /* Slate 600 */
+  --text-500: #64748b; /* Slate 500 */
+  
+  --bg-800: #e2e8f0; /* Slate 200 */
+  --bg-900: #f1f5f9; /* Slate 100 */
+  --bg-950: #ffffff; /* White */
+  
+  --bg-primary: #f8fafc; /* Slate 50 */
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --border-color: rgba(168, 85, 247, 0.22);
+  --radial-bg: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+               radial-gradient(circle at 100% 100%, rgba(34, 211, 238, 0.03) 0%, transparent 50%),
+               #f8fafc;
+               
+  --text-heading: #0f172a;
+  
+  --chart-grid: rgba(15, 23, 42, 0.08);
+  --heatmap-empty-fill: #e2e8f0;
+  --heatmap-empty-stroke: #cbd5e1;
+}
+
+/* Base resets & customizations */
+html, body, #root {
+  background-color: var(--bg-primary);
+  color: var(--text-200);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure text-white is overrideable/theme-aware for titles */
+.text-white {
+  color: var(--text-heading);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 7, 19, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(18, 11, 30, 0.3);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.2);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.45);
+}
+
+/* Glassmorphism styles */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+html.light .glass-card {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 4px 20px 0 rgba(15, 23, 42, 0.05);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card-hover:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.12), 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Glowing text and borders */
+.text-glow-purple {
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+/* Radial background overlays */
+.radial-bg {
+  background: var(--radial-bg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.6;
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 24px rgba(34, 211, 238, 0.7);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.pulse-glow-indicator {
+  animation: pulse-slow 2s infinite ease-in-out;
+}
+
+/* Print Specific Rules for PDF Export */
+@media print {
+  /* Redefine CSS variables for high-contrast print */
+  :root {
+    --chart-grid: rgba(15, 23, 42, 0.15) !important;
+    --heatmap-empty-fill: #f1f5f9 !important;
+    --heatmap-empty-stroke: #cbd5e1 !important;
+  }
+
+  /* Reset height and overflow for print */
+  html, body, #root, .h-screen, .h-full, .overflow-hidden,
+  div[class*="h-screen"], div[class*="overflow-hidden"], div[class*="h-full"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Prevent scrolling container clipping inside code blocks and grids */
+  div, pre, code {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Hide interactive/ui elements */
+  header, sidebar, button, .no-print, [class*="no-print"] {
+    display: none !important;
+  }
+
+  /* Force print-readable high-contrast colors for text */
+  h1, h2, h3, h4, h5, h6, span, p, div, strong, a, pre, code {
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+
+  /* Stack main layout grid structures vertically for print sheets */
+  .grid-cols-1, .grid-cols-2, .grid-cols-3, .grid-cols-4,
+  [class*="md:grid-cols-"], [class*="lg:grid-cols-"], [class*="xl:grid-cols-"] {
+    display: block !important;
+  }
+  .grid > *, [class*="grid-cols-"] > * {
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Transparent background fallback for generic containers to avoid dark-block text clash */
+  div, section, article, header, main, select, input, textarea {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Preserve color intent for status badges in print */
+  .text-cyan-600, .text-cyan-500, .text-cyan-400 { color: #0284c7 !important; }
+  .text-amber-600, .text-amber-500 { color: #b45309 !important; }
+  .text-rose-600, .text-rose-500 { color: #be123c !important; }
+  .text-emerald-500, .text-emerald-400 { color: #047857 !important; }
+  .text-purple-500, .text-purple-400 { color: #6b21a8 !important; }
+
+  /* Keep solid color backgrounds for progress bar fills */
+  .bg-cyan-500, .bg-cyan-400 { background-color: #0284c7 !important; }
+  .bg-amber-600, .bg-amber-500 { background-color: #b45309 !important; }
+  .bg-rose-600, .bg-rose-500 { background-color: #be123c !important; }
+  .bg-emerald-500, .bg-emerald-400 { background-color: #047857 !important; }
+  .bg-purple-600, .bg-purple-500 { background-color: #7c3aed !important; }
+
+  /* Explicit light card borders and backgrounds */
+  .glass-card, table, tr, th, td, pre, code {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    page-break-inside: avoid;
+  }
+
+  pre, code, td, th {
+    background-color: #f8fafc !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Style Bubble Cloud SVG for clean print visibility */
+  .mastery-cloud-grid svg circle {
+    stroke: #7c3aed !important;
+    fill: #f8fafc !important;
+  }
+  .mastery-cloud-grid svg path {
+    fill: #10b981 !important;
+    opacity: 0.35 !important;
+  }
+  svg text {
+    fill: #0f172a !important;
+  }
+
+  /* Code templates syntax highlighting overrides for high-contrast print */
+  code span.text-pink-500, pre span.text-pink-500 { color: #d01716 !important; font-weight: bold !important; }
+  code span.text-cyan-400, pre span.text-cyan-400 { color: #005a8f !important; font-weight: bold !important; }
+  code span.text-amber-400, pre span.text-amber-400 { color: #795da3 !important; }
+  code span.text-emerald-400, pre span.text-emerald-400 { color: #22863a !important; }
+  code span.text-orange-400, pre span.text-orange-400 { color: #e36209 !important; }
+  code span.text-slate-500, pre span.text-slate-500 { color: #6a737d !important; font-style: italic !important; }
+}
+
