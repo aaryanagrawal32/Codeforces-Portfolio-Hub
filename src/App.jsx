@@ -167,11 +167,7 @@ export default function App() {
       localStorage.removeItem("cf_portfolio_rivalRatingHistory");
       localStorage.removeItem("cf_portfolio_rivalSubmissions");
 
-      setHandleInput(mockData.handle);
-      setUserData(mockData.userInfo);
-      setRatingHistory(mockData.ratingHistory);
-      setSubmissions(mockData.submissions);
-      setIsSynced(true);
+      setIsSynced(false);
       return;
     }
 
@@ -191,11 +187,7 @@ export default function App() {
         setIsDuelActive(true);
       }
     } else {
-      setHandleInput(mockData.handle);
-      setUserData(mockData.userInfo);
-      setRatingHistory(mockData.ratingHistory);
-      setSubmissions(mockData.submissions);
-      setIsSynced(true);
+      setIsSynced(false);
     }
   }, []);
 

@@ -107,8 +107,8 @@ export default function ProfileDashboard({
         solvedSet.add(`${sub.problem.contestId}-${sub.problem.index}`);
       }
     });
-    return solvedSet.size || 893; // Default fallback matching Leetcode style Solved Card
-  }, [submissions]);
+    return isSynced ? solvedSet.size : (solvedSet.size || 893);
+  }, [submissions, isSynced]);
 
   // 2. LeetCode-style difficulty solved stats
   const solvedDifficultyStats = useMemo(() => {
@@ -149,11 +149,11 @@ export default function ProfileDashboard({
       mediumTotal,
       hardSolved,
       hardTotal,
-      totalSolved: solvedUnique.size || 893,
+      totalSolved: isSynced ? solvedUnique.size : (solvedUnique.size || 893),
       totalAvailable,
       attempting: attemptedSet.size - solvedUnique.size
     };
-  }, [submissions]);
+  }, [submissions, isSynced]);
 
   // 3. Tag Co-occurrence Insights (Suggestion 17)
   const coOccurrenceInsights = useMemo(() => {
@@ -242,7 +242,7 @@ export default function ProfileDashboard({
       }
     });
 
-    if (solveDurations.length === 0) return "1.4 days avg";
+    if (solveDurations.length === 0) return isSynced ? "N/A" : "1.4 days avg";
     const avgMins = solveDurations.reduce((a, b) => a + b, 0) / solveDurations.length;
     if (avgMins < 60) return `${Math.round(avgMins)} mins avg`;
     const avgHours = avgMins / 60;
